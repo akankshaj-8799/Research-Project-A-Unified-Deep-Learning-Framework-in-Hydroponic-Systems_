@@ -1,0 +1,12 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^\\$env:Path = \"C:\\\\Program Files\\\\Git\\\\mingw64\\\\bin;C:\\\\Program Files\\\\Git\\\\usr\\\\bin;C:\\\\Program Files\\\\Git\\\\bin;\" \\+ \\$env:Path; if\\(!\\(Test-Path \"\\$env:USERPROFILE\\\\\\.ssh\"\\)\\) \\{ New-Item -ItemType Directory -Path \"\\$env:USERPROFILE\\\\\\.ssh\" -Force \\| Out-Null \\}; ssh-keygen -t rsa -b 4096 -f \"\\$env:USERPROFILE\\\\\\.ssh\\\\id_rsa\" -N \"\" -C \"akankshaj-8799\" 2>&1 \\| Write-Host; \"SSH key generated\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^\\$env:Path = \"C:\\\\Program Files\\\\Git\\\\mingw64\\\\bin;C:\\\\Program Files\\\\Git\\\\usr\\\\bin;C:\\\\Program Files\\\\Git\\\\bin;\" \\+ \\$env:Path; ssh-keygen -t rsa -b 4096 -f \"\\$env:USERPROFILE\\\\\\.ssh\\\\id_rsa\" -N \"\" 2>&1 \\| Write-Host$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}
