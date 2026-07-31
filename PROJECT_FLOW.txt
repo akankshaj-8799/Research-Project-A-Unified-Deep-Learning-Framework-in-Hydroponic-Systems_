@@ -1,0 +1,55 @@
+Crop Image Classification Project - Short Flow
+
+How to run:
+cd "/Volumes/Adarsh/AJ proj"
+./.codex-venv/bin/streamlit run streamlit_app.py
+
+Main idea:
+This project predicts crop type, growth stage, and health from an uploaded crop image.
+It uses a trained PyTorch CNN model saved in crop_cnn.pt.
+
+1. Model and image helpers - crop_cnn.py
+- Lines 8-10: Sets allowed image types, image size 128, and model path crop_cnn.pt.
+- Lines 49-79: Defines CropGroupCNN, the CNN used for final prediction.
+- Lines 82-87: Converts an image into a normalized tensor for the model.
+- Lines 90-103: Converts folder names into labels like crop, stage, and health.
+- Lines 106-125: Reads images from archive/ and Sunflower Compressed/ and creates samples.
+
+2. Training - train_light_model.py
+- Lines 15-31: Dataset class opens each image, optionally flips it, converts it to tensor, and returns its label.
+- Lines 34-40: Reads command options like epochs, batch size, and output file.
+- Lines 49-54: Chooses device: Apple MPS, CUDA, or CPU.
+- Lines 57-67: Calculates accuracy for full class, crop, stage, and health.
+- Lines 70-86: Runs one training epoch.
+- Lines 89-103: Evaluates the model on validation data.
+- Lines 106-123: Loads all image samples and splits them into train and validation sets.
+- Lines 128-135: Uses weighted sampling so smaller classes get more attention.
+- Lines 137-141: Creates model, loss function, optimizer, and scheduler.
+- Lines 153-171: Trains for each epoch and prints validation results.
+- Lines 173-187: Saves the best trained model into crop_cnn.pt.
+
+3. App / Prediction UI - streamlit_app.py
+- Lines 15-25: Loads crop_cnn.pt and prepares the model.
+- Lines 28-33: Sends uploaded image through the model and gets probabilities.
+- Lines 36-51: Calculates simple image cues like brightness, color, and contrast.
+- Lines 54-77: Creates a short text explanation for the prediction.
+- Lines 80-104: Sets up the Streamlit page and upload button.
+- Lines 106-117: When user uploads an image, it predicts crop, stage, health, and confidence.
+- Lines 119-136: Shows uploaded image, prediction results, warning, and explanation.
+
+4. Report file - build_project_report.py
+- Lines 16-17: Sets project folder and output Word report name.
+- Lines 38-54: Adds tables to the report.
+- Lines 57-67: Adds image figures to the report.
+- Lines 70-80: Adds code blocks into the report.
+- Lines 211-219: Reads dataset/model information for report statistics.
+
+Simple full flow:
+Dataset folders -> crop_cnn.py reads images and labels -> train_light_model.py trains CNN -> crop_cnn.pt is saved -> streamlit_app.py loads model -> user uploads image -> app predicts crop, stage, health.
+
+Important files:
+- streamlit_app.py: Run this to open the web app.
+- train_light_model.py: Run this to train the model again.
+- crop_cnn.py: Model structure and image preprocessing.
+- crop_cnn.pt: Saved trained model.
+- build_project_report.py: Creates the Word project report.
